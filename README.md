@@ -130,7 +130,7 @@ Descripción: Agrega una clase nueva a una unidad específica dentro de un curso
 - Descripción: Elimina una clase específica de una unidad en un curso.
 
 ### 4.4 Gestión de Comentarios
-#### a) Agregar un comentario a un curso o a una clase
+#### a) Agregar un comentario y puntuacion a un curso o a una clase
 - Verbo HTTP: POST Ruta: /comentarios
 - Body (JSON):
 
@@ -147,6 +147,37 @@ Descripción: Agrega una clase nueva a una unidad específica dentro de un curso
 #### b) Eliminar un comentario 
 - Verbo HTTP: POST Ruta: /comentarios/:id
 - Descripcion: Eliminar un comentario con su id correspondiente
+
+#### c) Agregar Comentario y Puntuación a un Curso
+- Verbo HTTP: POST Ruta: /usuarios/cursos/:cursoId/comentarios
+- Descripcion: Permite a un usuario agregar un comentario y una puntuación a un curso.
+
+
+```
+{
+  "username": "usuario",
+  "puntuacion": int,
+  "comentario": "String"
+}
+```
+
+#### d)Obtener Comentarios de un Curso
+- Verbo HTTP: GET Ruta: /usuarios/cursos/:cursoId/comentarios
+- Descripcion: Obtiene los comentarios realizados en un curso específico.
+
+#### e)Obtener Comentarios Realizados por un Usuario
+- Verbo HTTP: GET Ruta: /usuarios/:username/comentarios
+- Descripcion: Obtiene todos los comentarios realizados por un usuario.
+
+#### f)Obtener Cursos Revisados por un Usuario
+- Verbo HTTP: GET Ruta: /usuarios/cursos/revisados
+- Descripcion:  Devuelve los cursos comentados por un usuario, junto con los comentarios y las puntuaciones.
+
+```
+{
+  "username": "usuario"
+}
+```
 
 ## JSON De prueba
 
