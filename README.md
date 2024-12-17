@@ -37,6 +37,43 @@ Asegúrate de tener instaladas las siguientes herramientas antes de ejecutar la 
 ### -Endpoint para gestión de comentarios: http://localhost:3000/comentarios
 
 
+## Uso de Neo4j
+
+### Requisitos previos
+Descarga e instala Neo4j Desktop desde https://neo4j.com/download/.
+- Crea un proyecto y una base de datos local con el nombre TALLER2DBNR o el nombre deseado.
+- Configura un usuario y contraseña para tu base de datos.
+Usuario por defecto: neo4j
+Contraseña: contraseña
+
+### Variables de entorno
+
+```
+NEO4J_SCHEME=bolt
+NEO4J_HOST=localhost
+NEO4J_PORT=7687
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=contraseña
+```
+
+### Vista grafica de neo4j
+
+
+### Nodos:
+#### Usuario ➡ Representa usuarios con el atributo username.
+#### Curso ➡ Representa cursos con el atributo id.
+### Relación COMENTA:
+texto: Contenido del comentario.
+puntuacion: Valor de puntuación.
+fecha: Fecha del comentario.
+
+### Visualizacion de datos
+
+```
+MATCH (u:Usuario)-[r:COMENTA]->(c:Curso)
+RETURN u.username, c.id, r.texto, r.puntuacion, r.fecha
+```
+
 ## Uso de la API
 
 ### 4.1 Gestión de Cursos
