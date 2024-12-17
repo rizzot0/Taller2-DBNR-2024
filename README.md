@@ -35,7 +35,11 @@ Asegúrate de tener instaladas las siguientes herramientas antes de ejecutar la 
 ### -Endpoint para gestión de unidades: http://localhost:3000/unidades
 ### -Endpoint para gestión de clases: http://localhost:3000/clases
 ### -Endpoint para gestión de comentarios: http://localhost:3000/comentarios
-### Obtener comentario por curso: http://localhost:3000//usuarios/cursos/idcurso/comentarios
+### Crear usuario: http://localhost:3000/usuarios/crear
+### Agregar curso a usuario: http://localhost:3000/usuarios/cursos/registrar
+### Agregar comentario y puntuacion: http://localhost:3000/usuarios/cursos/:cursoId/comentarios
+### Obtener comentario por curso: http://localhost:3000/usuarios/cursos/idcurso/comentarios
+
 
 ## Comandos redis:
 
