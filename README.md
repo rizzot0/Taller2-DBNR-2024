@@ -35,7 +35,30 @@ Asegúrate de tener instaladas las siguientes herramientas antes de ejecutar la 
 ### -Endpoint para gestión de unidades: http://localhost:3000/unidades
 ### -Endpoint para gestión de clases: http://localhost:3000/clases
 ### -Endpoint para gestión de comentarios: http://localhost:3000/comentarios
+### Obtener comentario por curso: http://localhost:3000//usuarios/cursos/idcurso/comentarios
 
+## Comandos redis:
+
+### Ver usuario:
+```
+HGETALL user:juanita
+```
+
+### Ver cursos de un usuario:
+
+```
+HGET user:juanita cursos.123
+```
+
+## Comandos Neo4j:
+
+### Ver comentario y puntuacion:
+
+```
+MATCH (u:Usuario)-[r:COMENTA]->(c:Curso {id: "123"})
+RETURN u.username, r.texto, r.puntuacion, r.fecha
+
+```
 
 ## Uso de Neo4j
 
@@ -275,4 +298,26 @@ Descripción: Agrega una clase nueva a una unidad específica dentro de un curso
   "idrelacion": "ID_DEL_CURSO_O_CLASE"  // ID del curso o clase al que está relacionado este comentario
 }
 ```
+
+### Agregar curso a usuario
+
+```
+{
+  "username": "juanita",
+  "cursoId": "123"
+}
+```
+
+###  Agregar Comentario y Puntuación
+
+```
+{
+  "username": "juanita",
+  "puntuacion": 5,
+  "comentario": "Excelente curso"
+}
+
+```
+
+
 
