@@ -14,8 +14,8 @@ export class UsuariosService {
     @InjectModel(Curso.name) private readonly cursoModel: Model<Curso>,
   ) {
     this.neo4jDriver = neo4j.driver(
-      'bolt://localhost:7687', // Cambia esto según tu configuración
-      neo4j.auth.basic('neo4j', 'password'), // Credenciales de Neo4j
+      'bolt://localhost:7687', 
+      neo4j.auth.basic('neo4j', 'contraseña'), 
     );
   }
 

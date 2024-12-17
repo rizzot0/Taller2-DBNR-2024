@@ -1,19 +1,28 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import neo4j, { Driver, Session } from 'neo4j-driver';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Injectable()
 export class Neo4jService implements OnModuleInit, OnModuleDestroy {
   private driver: Driver;
-  private database = 'taller2bdnr'; // Especificar la base de datos aquí
 
   async onModuleInit() {
+    const scheme = process.env.NEO4J_SCHEME || 'bolt';
+    const host = process.env.NEO4J_HOST || 'localhost';
+    const port = process.env.NEO4J_PORT || '7687';
+    const username = process.env.NEO4J_USERNAME || 'neo4j';
+    const password = process.env.NEO4J_PASSWORD || 'contraseña';
+
     try {
       this.driver = neo4j.driver(
-        'bolt://localhost:7687',
-        neo4j.auth.basic('neo4j', 'contraseña') // Usuario y contraseña directos
+        `${process.env.NEO4J_SCHEME}://${process.env.NEO4J_HOST}:${process.env.NEO4J_PORT}`,
+        neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD),
       );
+      
       await this.driver.verifyConnectivity();
-      console.log(`Conexión a Neo4j establecida a la base de datos: ${this.database}`);
+      console.log('Conexión a Neo4j exitosa.');
     } catch (error) {
       console.error('Error al conectar a Neo4j:', error.message);
       throw error;
@@ -22,8 +31,7 @@ export class Neo4jService implements OnModuleInit, OnModuleDestroy {
 
   async executeQuery(query: string, params?: Record<string, any>): Promise<any> {
     console.log('Creando sesión para Neo4j...');
-    const session: Session = this.driver.session({ database: this.database }); // Especificar la base aquí
-    console.log('Sesión creada:', session);
+    const session: Session = this.driver.session();
     try {
       const result = await session.run(query, params);
       return result.records.map((record) => record.toObject());
